@@ -39,14 +39,14 @@ namespace csight::game {
       auto pkm = std::make_shared<PKMType>(pkmBytes);
 
       // Only valid trade PKM
-      printf(pkmBytes);
+      printf("%lu\n", (unsigned long)pkmBytes);
       if (pkm->getIsValid() && offset == 0xaf286078) {
         FILE *dest = NULL;
-        dest = fopen("sdmc:/switch/pkm/" + pkm->getPID() + ".pk8", "wb")
+        dest = fopen("sdmc:/switch/pkm/" + std::string(pkm->getPID()) + ".pk8", "wb");
 
-        if (pFile!=NULL) {
-          fputs (pkmBytes,pFile);
-          fclose (pFile);
+        if (pFile != NULL) {
+          fputs(pkmBytes, pFile);
+          fclose(pFile);
         }
       }
 
