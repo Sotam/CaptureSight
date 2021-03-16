@@ -6,6 +6,7 @@
 #include <csight/Utils.hpp>
 #include <switch.h>
 #include <vector>
+#include <stdio.h>
 
 namespace csight::game {
   template <class PKMType>
@@ -36,6 +37,18 @@ namespace csight::game {
 
       this->readHeap(offset, pkmBytes, pkmSize);
       auto pkm = std::make_shared<PKMType>(pkmBytes);
+
+      // Only valid trade PKM
+      printf(pkmBytes);
+      if (pkm->getIsValid() && offset == 0xaf286078) {
+        FILE *dest = NULL;
+        dest = fopen("sdmc:/switch/pkm/" + pkm->getPID() + ".pk8", "wb")
+
+        if (pFile!=NULL) {
+          fputs (pkmBytes,pFile);
+          fclose (pFile);
+        }
+      }
 
       delete[] pkmBytes;
 
