@@ -58,6 +58,10 @@ class CustomDaycareView : public DetachableView {
     m_daycare2_item = new tsl::elm::ListItem("");
     list->addItem(m_daycare2_item);
 
+    list->addItem(new tsl::elm::CategoryHeader("RAW Egg"));
+    m_raw_egg_item = new tsl::elm::ListItem("");
+    list->addItem(m_raw_egg_item);
+
     list->addItem(new tsl::elm::CategoryHeader("Seed"));
     m_seed_item = new tsl::elm::ListItem("");
     list->addItem(m_seed_item);
@@ -90,6 +94,8 @@ class CustomDaycareView : public DetachableView {
     auto egg_details1 = dbg::ReadCheatProcess<EggDetails>(get_daycare_addr + 8, default_egg_details);
     auto egg_details = std::make_shared<EggDetails>(egg_details1);
 
+    auto egg_details_raw = dbg::ReadCheatProcess<u64>(get_daycare_addr + 8, default_egg_details);
+
     m_offset_item->setFocused(false);
     m_offset_item->setText(utils::num_to_hex(offset));
 
@@ -116,6 +122,9 @@ class CustomDaycareView : public DetachableView {
 
     m_daycare2_item->setFocused(false);
     m_daycare2_item->setText(utils::num_to_hex(get_daycare_addr + 8));
+
+    m_raw_egg_item->setFocused(false);
+    m_raw_egg_item->setText(utils::num_to_hex(egg_details_raw));
 
     m_seed_item->setFocused(false);
     m_seed_item->setText(utils::num_to_hex(egg_details->seed));
@@ -154,6 +163,7 @@ class CustomDaycareView : public DetachableView {
   tsl::elm::ListItem *m_prefs_item;
   tsl::elm::ListItem *m_daycare1_item;
   tsl::elm::ListItem *m_daycare2_item;
+  tsl::elm::ListItem *m_raw_egg_item;
   tsl::elm::ListItem *m_seed_item;
   tsl::elm::ListItem *m_steps_item;
   tsl::elm::OverlayFrame *m_frame;
