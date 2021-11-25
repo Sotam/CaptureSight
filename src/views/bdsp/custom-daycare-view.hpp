@@ -87,7 +87,8 @@ class CustomDaycareView : public DetachableView {
       stepCount : 0,
     };
 
-    auto egg_details = dbg::ReadCheatProcess<EggDetails>(get_daycare_addr + 8, default_egg_details);
+    auto egg_details1 = dbg::ReadCheatProcess<EggDetails>(get_daycare_addr + 8, default_egg_details);
+    auto egg_details = std::make_shared<EggDetails>(egg_details1);
 
     m_offset_item->setFocused(false);
     m_offset_item->setText(utils::num_to_hex(offset));
@@ -110,11 +111,11 @@ class CustomDaycareView : public DetachableView {
     m_prefs_item->setFocused(false);
     m_prefs_item->setText(utils::num_to_hex(get_player_prefs_provider));
 
-    m_daycare_item1->setFocused(false);
-    m_daycare_item1->setText(utils::num_to_hex(get_daycare_addr));
+    m_daycare1_item->setFocused(false);
+    m_daycare1_item->setText(utils::num_to_hex(get_daycare_addr));
 
-    m_daycare_item2->setFocused(false);
-    m_daycare_item2->setText(utils::num_to_hex(get_daycare_addr + 8));
+    m_daycare2_item->setFocused(false);
+    m_daycare2_item->setText(utils::num_to_hex(get_daycare_addr + 8));
 
     m_seed_item->setFocused(false);
     m_seed_item->setText(utils::num_to_hex(egg_details->seed));
