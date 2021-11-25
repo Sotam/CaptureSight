@@ -58,9 +58,13 @@ class CustomDaycareView : public DetachableView {
     m_daycare2_item = new tsl::elm::ListItem("");
     list->addItem(m_daycare2_item);
 
-    list->addItem(new tsl::elm::CategoryHeader("RAW Egg"));
-    m_raw_egg_item = new tsl::elm::ListItem("");
-    list->addItem(m_raw_egg_item);
+    list->addItem(new tsl::elm::CategoryHeader("RAW Egg1"));
+    m_raw_egg_item1 = new tsl::elm::ListItem("");
+    list->addItem(m_raw_egg_item1);
+
+    list->addItem(new tsl::elm::CategoryHeader("RAW Egg2"));
+    m_raw_egg_item2 = new tsl::elm::ListItem("");
+    list->addItem(m_raw_egg_item2);
 
     list->addItem(new tsl::elm::CategoryHeader("Seed"));
     m_seed_item = new tsl::elm::ListItem("");
@@ -94,7 +98,8 @@ class CustomDaycareView : public DetachableView {
     auto egg_details1 = dbg::ReadCheatProcess<EggDetails>(get_daycare_addr + 8, default_egg_details);
     auto egg_details = std::make_shared<EggDetails>(egg_details1);
 
-    auto egg_details_raw = dbg::ReadCheatProcess<u64>(get_daycare_addr + 8);
+    auto egg_details_raw1 = dbg::ReadCheatProcess<u64>(get_daycare_addr);
+    auto egg_details_raw2 = dbg::ReadCheatProcess<u64>(get_daycare_addr + 8);
 
     m_offset_item->setFocused(false);
     m_offset_item->setText(utils::num_to_hex(offset));
@@ -123,8 +128,11 @@ class CustomDaycareView : public DetachableView {
     m_daycare2_item->setFocused(false);
     m_daycare2_item->setText(utils::num_to_hex(get_daycare_addr + 8));
 
-    m_raw_egg_item->setFocused(false);
-    m_raw_egg_item->setText(utils::num_to_hex(egg_details_raw));
+    m_raw_egg_item1->setFocused(false);
+    m_raw_egg_item1->setText(utils::num_to_hex(egg_details_raw1));
+
+    m_raw_egg_item2->setFocused(false);
+    m_raw_egg_item2->setText(utils::num_to_hex(egg_details_raw2));
 
     m_seed_item->setFocused(false);
     m_seed_item->setText(utils::num_to_hex(egg_details->seed));
@@ -163,7 +171,8 @@ class CustomDaycareView : public DetachableView {
   tsl::elm::ListItem *m_prefs_item;
   tsl::elm::ListItem *m_daycare1_item;
   tsl::elm::ListItem *m_daycare2_item;
-  tsl::elm::ListItem *m_raw_egg_item;
+  tsl::elm::ListItem *m_raw_egg_item1;
+  tsl::elm::ListItem *m_raw_egg_item2;
   tsl::elm::ListItem *m_seed_item;
   tsl::elm::ListItem *m_steps_item;
   tsl::elm::OverlayFrame *m_frame;
