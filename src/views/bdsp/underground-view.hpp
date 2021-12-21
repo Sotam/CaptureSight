@@ -18,11 +18,12 @@ class UndergroundView : public tsl::Gui {
     auto frame = new tsl::elm::OverlayFrame("Underground", " ");
     auto list = new tsl::elm::List();
 
+    // We always need at least one item in a list to prevent it from crashing
     list->addItem(new tsl::elm::CategoryHeader("Pokemon"));
     auto pkxs = bdsp::utils::read_underground_pokemon();
 
     for (auto pkx : pkxs) {
-      std::string label = pkx->SpeciesString() + (pkx->IsShiny() ? " ★" : "");
+      std::string label = pkx->SpeciesString() + (pkx->IsShiny() ? " ★" : " ");
       list->addItem(new PokemonViewButton(label, pkx));
     }
 
@@ -34,7 +35,5 @@ class UndergroundView : public tsl::Gui {
 
 class UndergroundViewButton : public Button {
  public:
-  UndergroundViewButton() : Button("Underground") {
-    this->onClick([]() { tsl::changeTo<UndergroundView>(); });
-  }
+  UndergroundViewButton() : Button("Underground") { this->onClick(tsl::changeTo<UndergroundView>); }
 };
