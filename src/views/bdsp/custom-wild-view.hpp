@@ -98,12 +98,12 @@ class CustomWildView : public DetachableView {
     m_daycare1_item->setText(utils::num_to_hex(ek8));
   }
 
-  std::shared_ptr<csight::Pkx> read_wild_pokemon() {
-    u64 address = get_battle_setup_param_addr();
-    u64 tmp = dbg::ReadCheatProcess<u64>(address + 0x58);
-    tmp = dbg::ReadCheatProcess<u64>(tmp + 0x28);
-    return read_pokemon_in_party(tmp, 0);
-  }
+  // std::shared_ptr<csight::Pkx> read_wild_pokemon() {
+  //   u64 address = get_battle_setup_param_addr();
+  //   u64 tmp = dbg::ReadCheatProcess<u64>(address + 0x58);
+  //   tmp = dbg::ReadCheatProcess<u64>(tmp + 0x28);
+  //   return read_pokemon_in_party(tmp, 0);
+  // }
 
   u64 get_battle_setup_param_addr() { return dbg::ReadCheatProcess<u64>(get_player_prefs_provider() + 0x7e8); }
 
