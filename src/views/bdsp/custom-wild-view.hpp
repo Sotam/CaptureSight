@@ -95,7 +95,7 @@ class CustomWildView : public DetachableView {
     m_prefs_item->setText(utils::num_to_hex(tmp6));
 
     m_daycare1_item->setFocused(false);
-    m_daycare1_item->setText(utils::num_to_hex(ek8));
+    m_daycare1_item->setText(utils::num_to_hex(0));
   }
 
   // std::shared_ptr<csight::Pkx> read_wild_pokemon() {
