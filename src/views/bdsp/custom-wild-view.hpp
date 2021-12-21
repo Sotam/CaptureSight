@@ -98,14 +98,6 @@ class CustomWildView : public DetachableView {
     m_daycare1_item->setText(utils::num_to_hex(ek8));
   }
 
-  u64 get_player_prefs_provider_offset() {
-    if (dbg::GetCheatProcessTitleId() == SupportedGame::BrilliantDiamond) {
-      return bdsp::diamond::Offsets::PlayerPrefsProviderInstance;
-    }
-
-    return bdsp::pearl::Offsets::PlayerPrefsProviderInstance;
-  }
-
   std::shared_ptr<csight::Pkx> read_wild_pokemon() {
     u64 address = get_battle_setup_param_addr();
     u64 tmp = dbg::ReadCheatProcess<u64>(address + 0x58);
