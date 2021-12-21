@@ -141,25 +141,7 @@ class CustomDaycareView : public DetachableView {
     m_steps_item->setText(std::to_string(egg_details->stepCount));
   }
 
-  u64 get_player_prefs_provider_offset() {
-    if (dbg::GetCheatProcessTitleId() == SupportedGame::BrilliantDiamond) {
-      return bdsp::diamond::Offsets::PlayerPrefsProviderInstance;
-    }
-
-    return bdsp::pearl::Offsets::PlayerPrefsProviderInstance;
-  }
-
-  // u64 get_player_prefs_provider() {
-  //   u64 offset = get_player_prefs_provider_offset();
-  //   u64 tmp = dbg::ReadCheatProcessNso<u64>(offset);
-  //   tmp = dbg::ReadCheatProcess<u64>(tmp + 0x18);
-  //   tmp = dbg::ReadCheatProcess<u64>(tmp + 0xc0);
-  //   tmp = dbg::ReadCheatProcess<u64>(tmp + 0x28);
-  //   tmp = dbg::ReadCheatProcess<u64>(tmp + 0xb8);
-  //   return dbg::ReadCheatProcess<u64>(tmp);
-  // }
-
-  // u64 get_daycare_addr() { return get_player_prefs_provider() + 0x450; }
+  u64 get_player_prefs_provider_offset() { return bdsp::Offsets::PlayerPrefsProviderInstance; }
 
  private:
   tsl::elm::ListItem *m_offset_item;
