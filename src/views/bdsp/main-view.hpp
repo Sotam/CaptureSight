@@ -5,8 +5,10 @@
 #include "../party-list-view.hpp"
 #include "../pokemon-view.hpp"
 #include "../rng-view.hpp"
+#include "../trainer-view.hpp"
 #include "./custom-daycare-view.hpp"
 #include "./daycare-view.hpp"
+#include "./roamer-view.hpp"
 #include "./underground-view.hpp"
 #include <csight-core.h>
 #include <cstring>
@@ -30,11 +32,20 @@ class MainBdSpView : public tsl::Gui {
     list->addItem(new DaycareViewButton());
     list->addItem(new CustomDaycareViewButton());
     list->addItem(new UndergroundViewButton());
+    list->addItem(new PokemonViewButton("Union Trade", bdsp::utils::read_other_player_union_trade_pokemon));
+    list->addItem(new RoamerListViewButton());
 
     list->addItem(new tsl::elm::CategoryHeader("RNG"));
+    auto main_rng_addr = dbg::ReadCheatProcessNso<u64>(bdsp::RngOffset::MainPtr);
+    list->addItem(new XorshiftRngViewButton("Main RNG", main_rng_addr));
+    auto rand_group_0_addr = bdsp::utils::get_random_group_state_addr(0);
+    list->addItem(new LcrngViewButton("Random Group 0", rand_group_0_addr));
+    auto rand_group_1_addr = bdsp::utils::get_random_group_state_addr(1);
+    list->addItem(new LcrngViewButton("Random Group 1", rand_group_1_addr));
 
-    auto rng_address = dbg::ReadCheatProcessNso<u64>(bdsp::RngOffset::MainPtr);
-    list->addItem(new XorshiftRngViewButton("Main RNG", rng_address));
+    list->addItem(new tsl::elm::CategoryHeader("Trainer Info"));
+    auto trainer_info = bdsp::utils::read_trainer_info();
+    list->addItem(new TrainerViewButton(trainer_info));
 
     frame->setContent(list);
 

@@ -99,7 +99,7 @@ class CustomDaycareView : public DetachableView {
     auto egg_details = std::make_shared<EggDetails>(egg_details1);
 
     auto egg_details_raw1 = dbg::ReadCheatProcess<u64>(get_daycare_addr);
-    auto egg_details_raw2 = dbg::ReadCheatProcess<u128>(get_daycare_addr + 8);
+    auto egg_details_raw2 = dbg::ReadCheatProcess<u64>(get_daycare_addr + 8);
 
     m_offset_item->setFocused(false);
     m_offset_item->setText(utils::num_to_hex(offset));
